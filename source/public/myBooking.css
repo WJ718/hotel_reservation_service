@@ -1,0 +1,55 @@
+body { background-color: #f8f9fa; color: #333; font-family: 'Pretendard', sans-serif; }
+.container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+.logo { font-size: 24px; font-weight: bold; color: #3c82f7; cursor: pointer; }
+.header-section { margin-bottom: 30px; border-bottom: 2px solid #333; padding-bottom: 15px; }
+.header-section h1 { font-size: 24px; margin: 0; }
+
+.booking-list { display: flex; flex-direction: column; gap: 20px; }
+
+/* 예약 카드 디자인 */
+.booking-card { 
+    background: #fff; 
+    border-radius: 12px; 
+    padding: 25px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border: 1px solid #e9ecef;
+}
+
+.info-group .status-badge {
+    display: inline-block;
+    background: #e7f2ff;
+    color: #007bff;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.hotel-name { font-size: 20px; font-weight: 700; margin: 0 0 8px 0; color: #222; }
+.room-detail { color: #666; font-size: 15px; margin-bottom: 5px; }
+.stay-period { color: #888; font-size: 14px; }
+
+.price-group { text-align: right; }
+.amount { font-size: 18px; font-weight: 800; color: #000; margin-bottom: 10px; }
+
+.btn-detail {
+    background: #fff;
+    border: 1px solid #ced4da;
+    padding: 8px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+}
+.btn-detail:hover { background: #f1f3f5; }
+
+/* 예약 내역 없을 때 */
+.no-data { text-align: center; padding: 100px 0; background: #fff; border-radius: 12px; }
+.btn-main { 
+    display: inline-block; margin-top: 15px; padding: 10px 20px;
+    background: #007bff; color: #fff; text-decoration: none; border-radius: 6px;
+}

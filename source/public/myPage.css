@@ -1,0 +1,21 @@
+.mypage-container { max-width: 800px; margin: 40px auto; background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+h2 { font-size: 1.5rem; margin-bottom: 10px; color: #191f28; }
+.logo { font-size: 24px; font-weight: bold; color: #3c82f7; cursor: pointer; }
+/* 폼 스타일 */
+.update-form { display: flex; flex-direction: column; gap: 20px; }
+.input-group { display: flex; flex-direction: column; gap: 8px; }
+.input-group label { font-weight: bold; color: #4e5968; font-size: 0.9rem; }
+.input-group input { padding: 12px; border: 1px solid #d1d6db; border-radius: 8px; font-size: 1rem; }
+.btn-submit { background: #3182f6; color: white; border: none; padding: 14px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+.btn-submit:hover { background: #1b64da; }
+
+/* 예약 내역 간편 스타일 */
+.booking-summary-list { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
+.booking-summary-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; border: 1px solid #f2f4f6; border-radius: 12px; }
+.booking-text h4 { margin: 0; font-size: 1.1rem; }
+.booking-text p { margin: 4px 0 0 0; color: #8b95a1; font-size: 0.85rem; }
+.btn-more { color: #3182f6; text-decoration: none; font-weight: bold; font-size: 0.9rem; }
+
+header { display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; background: white; border-bottom: 1px solid #eee; }
+.auth-btns span { margin-right: 15px; font-weight: 500; }
+.auth-btns a { color: #6b7280; text-decoration: none; font-size: 0.9rem; }

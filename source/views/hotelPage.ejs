@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title><%= hotel.title %> - 객실 선택 | TripManager</title>
+    <link rel="stylesheet" href="/hotelPage.css">
+</head>
+<body>
+
+<header>
+    <div class="logo" onclick="location.href='/'" style="cursor: pointer;">TripManager</div>
+    <div class="auth-btns">
+        <% if (user) { %>
+            <span><%= user.name %>님</span>
+            <a href="/auth/logout">로그아웃</a>
+        <% } %>
+    </div>
+</header>
+
+<div class="container">
+    <div class="hotel-header">
+        <h1><%= hotel.title %></h1>
+        <div class="hotel-location">📍 <%= hotel.location %></div>
+    </div>
+
+    <h2 style="padding: 0 20px; margin-bottom: 20px;">객실 선택</h2>
+
+    <div class="room-grid">
+        <% if (hotel.Rooms && hotel.Rooms.length > 0) { %>
+            <% hotel.Rooms.forEach(function(room) { %>
+                <div class="room-card" onclick="location.href='/reserve/room/<%= room.id %>'">
+                    <div class="room-info">
+                        <div class="room-title"><%= room.title %></div>
+                        <div class="room-tag">최대 <%= room.maxCapacity %>인 투숙 가능</div>
+                        <div class="room-price">
+                            <%= room.price.toLocaleString() %>원 <small style="color:#8b95a1; font-weight: normal;">/ 1박</small>
+                        </div>
+                        <div class="room-tag">무료 Wi-Fi</div>
+                        <div class="room-tag">금연 객실</div>                        
+                        <button class="btn-booking">예약하기</button>
+                    </div>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p style="padding: 20px; color: #8b95a1;">현재 예약 가능한 객실이 없습니다.</p>
+        <% } %>
+    </div>
+</div>
+
+</body>
+</html>

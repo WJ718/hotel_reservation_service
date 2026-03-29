@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>해외 호텔 | TripManager</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo" onclick="location.href='/'" style="cursor: pointer;">TripManager</div>
+    <div class="auth-btns">
+        <% if (user) { %>
+            <span><%= user.name %>님 환영합니다!</span>
+            <a href="/mypage" class="btn-blue">내 정보</a>
+            <a href="/auth/logout">로그아웃</a>
+        <% } else { %>
+            <a href="/auth/join">회원가입</a>
+            <a href="/auth/login" class="btn-blue">로그인</a>
+        <% } %>
+    </div>
+</header>
+
+<div class="hotel-container">
+    <div class="search-area">
+        <form action="/reserve/international" method="get">
+            <input type="text" name="query" placeholder="호텔 이름이나 장소로 검색" class="search-bar" style="width: 300px;">
+            <button type="submit" class="btn-blue">검색</button>
+        </form>
+    </div>
+
+    <h2>해외 호텔 목록</h2><br>
+    <div class="hotel-grid">
+        <% hotels.forEach(function(hotel) { %>
+            <div class="hotel-card" onclick="window.location.href='/reserve/hotel/<%= hotel.id %>'">
+                
+                <div class="hotel-info">
+                    <h3><%= hotel.title %></h3>
+                    <p>지역: <%= hotel.location %></p>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>
+
+</body>
+</html>

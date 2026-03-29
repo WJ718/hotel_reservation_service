@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>결제 실패 | TripManager</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .fail-box { text-align: center; padding: 60px 20px; }
+        .error-card { background: #f9fafb; border-radius: 12px; padding: 20px; margin: 24px 0; text-align: left; display: inline-block; min-width: 300px; }
+        .btn-group { display: flex; gap: 12px; justify-content: center; }
+        .btn-retry { background: #3182f6; color: white; border: none; padding: 12px 24px; border-radius: 10px; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <div class="fail-box">
+            <img src="https://static.toss.im/illusts/disturbed-face-spot-ending-frame.png" width="100" alt="실패">
+            <h2 style="margin-top: 20px;">결제에 실패했습니다</h2>
+            <p style="color: #4e5968;">불편을 드려 죄송합니다. 아래 내용을 확인해 주세요.</p>
+
+            <div class="error-card">
+                <p style="margin-bottom: 8px;"><strong>에러 코드:</strong> <%= code %></p>
+                <p><strong>사유:</strong> <%= message %></p>
+            </div>
+
+            <div class="btn-group">
+                <button onclick="history.back()" class="btn-retry">다시 시도하기</button>
+                <button onclick="location.href='/'" style="border: 1px solid #d1d6db; background: white; padding: 12px 24px; border-radius: 10px; cursor: pointer;">홈으로 이동</button>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
