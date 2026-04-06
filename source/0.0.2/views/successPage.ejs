@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center; /* 가로 중앙 */
+            align-items: center;     /* 세로 중앙 (필요 시) */
+            min-height: 100vh;       /* 화면 전체 높이 확보 */
+            background-color: #f9fafb;
+        }
+        .container {
+            width: 100%;
+            max-width: 500px; /* 너무 넓지 않게 조정 */
+            padding: 20px;
+        }
+        .btn-primary:hover {
+            background-color: #1b64da;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box_section">
+            <img width="100px" src="https://static.toss.im/illusts/check-blue-spot-ending-frame.png" style="margin-bottom: 20px;" />
+            
+            <h2 style="margin-bottom: 30px;">예약 및 결제가 완료되었습니다!</h2>
+
+            <div class="info-wrapper" style="margin-bottom: 30px;">
+                <div class="p-grid">
+                    <div class="p-grid-col" style="color: #6b7280;">예약 상품</div>
+                    <div class="p-grid-col"><strong><%= info.title %></strong></div>
+                </div>
+                <div class="p-grid">
+                    <div class="p-grid-col" style="color: #6b7280;">인원 수</div>
+                    <div class="p-grid-col"><strong><%= info.guestCount %></strong></div>
+                </div>
+                <div class="p-grid">
+                    <div class="p-grid-col" style="color: #6b7280;">결제 금액</div>
+                    <div class="p-grid-col"><strong><%= info.amount.toLocaleString() %>원</strong></div>
+                </div>
+                <div class="p-grid">
+                    <div class="p-grid-col" style="color: #6b7280;">주문 번호</div>
+                    <div class="p-grid-col" style="font-size: 0.9em;"><%= info.orderId %></div>
+                </div>
+            </div>
+            
+            <button class="btn-primary" onclick="location.href='/my/bookings'">예약 내역 확인</button>
+        </div>
+    </div>
+</body>
+</html>

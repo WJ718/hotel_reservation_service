@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>예약 내역 | TripManager</title>
+    <link rel="stylesheet" href="/myBooking.css">
+</head>
+<body>
+    <header>
+        <div class="logo" onclick="location.href='/'" style="cursor: pointer;">TripManager</div>
+    </header>
+    <main class="container">
+        <div class="header-section">
+            <h1>나의 예약 내역</h1>
+        </div>
+
+        <div class="booking-list">
+            <% if (res && res.length > 0) { %>
+                <% res.forEach(function(booking) { %>
+                    <div class="booking-card">
+                        <div class="info-group">
+                            <% if (
+                                booking.status === 'CANCELED' || 
+                                (booking.Payment && booking.Payment.status === 'REFUNDED')
+                            ) { %>
+                                <span class="status-badge" style="color: #f04452;">환불완료</span>
+                            <% } else if (booking.status === 'CONFIRMED') { %>
+                                <span class="status-badge" style="color: #007bff;">예약확정</span>
+                            <% } else { %>
+                                <span class="status-badge">기타</span>
+                            <% } %>
+                            
+                            <h2 class="hotel-name">
+                                <%= booking.Product ? booking.Product.title : '정보를 찾을 수 없는 호텔' %>
+                            </h2>
+                            
+                            <p class="room-detail">
+                                <strong><%= booking.Room ? booking.Room.title : '객실 정보 없음' %></strong> 
+                                / <%= booking.guestCount %>명
+                            </p>
+                            
+                            <p class="stay-period">
+                                📅 <%= booking.checkin %> ~ <%= booking.checkout %>
+                            </p>
+                        </div>
+
+                        <div class="price-group">
+                            <div class="amount">
+                                <%= booking.Payment ? booking.Payment.amount.toLocaleString() : '0' %>원
+                            </div>
+                            <button class="btn-detail" onclick="location.href='/my/bookings/<%= booking.id %>'">
+                                상세 정보
+                            </button>
+                        </div>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <div class="no-data">
+                    <p>아직 예약하신 내역이 없습니다.</p>
+                    <a href="/" class="btn-main">새로운 예약하러 가기</a>
+                </div>
+            <% } %>
+        </div>
+    </main>
+
+</body>
+</html>

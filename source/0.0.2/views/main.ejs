@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>TripManager</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">TripManager</div>
+    <input type="text" class="search-bar" placeholder="어디로 떠나시나요?">
+    <div class="auth-btns">
+        <% if (user) { %>
+            <span><%= user.name %>님 환영합니다!</span>
+            <a href="/mypage" class="btn-blue">내 정보</a>
+            <a href="/auth/logout">로그아웃</a>
+        <% } else { %>
+            <a href="/auth/join">회원가입</a>
+            <a href="/auth/login" class="btn-blue">로그인</a>
+        <% } %>
+    </div>
+</header>
+
+<nav>
+    <a href="/reserve/international">해외 숙소</a>
+    <a href="/reserve/domestic">국내 숙소</a>
+</nav>
+
+<div class="hero">
+    <h1>여행 호텔 결정은 TripManager와 함께!</h1>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+.hotel-header { padding: 40px 20px; background: white; border-bottom: 1px solid #eee; margin-bottom: 30px; }
+.hotel-header h1 { margin: 0; font-size: 2rem; color: #191f28; }
+.hotel-location { color: #8b95a1; margin-top: 8px; }
+.logo { font-size: 24px; font-weight: bold; color: #3c82f7; cursor: pointer; }
+.room-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    gap: 24px; 
+    padding: 0 20px 50px;
+}
+
+/* 방 카드(박스) 스타일 */
+.room-card { 
+    background: white; 
+    border-radius: 16px; 
+    overflow: hidden; 
+    border: 1px solid #f2f4f6;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.room-card:hover { 
+    transform: translateY(-8px); 
+    box-shadow: 0 12px 24px rgba(0,0,0,0.08); 
+    border-color: #3182f6;
+}
+
+.room-info { padding: 20px; }
+.room-title { font-size: 1.25rem; font-weight: bold; color: #191f28; margin-bottom: 8px; }
+.room-price { font-size: 1.1rem; color: #3182f6; font-weight: 600; margin-bottom: 15px; }
+
+.room-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    background: #f2f4f6;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: #4e5968;
+}
+
+.btn-booking {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    background: #f2f4f6;
+    color: #4e5968;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.room-card:hover .btn-booking {
+    background: #3182f6;
+    color: white;
+}

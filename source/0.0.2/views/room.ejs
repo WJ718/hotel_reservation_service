@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title><%= room.title %> - 예약하기</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <main class="container">
+        <div class="logo" onclick="location.href='/'" style="cursor: pointer;">TripManager</div><br>
+        <section class="hotel-detail">
+            <h1><%= room.title %></h1>
+            <p><%= room.Product.title %></p>
+            
+            <div class="reservation-box">
+                <h3>날짜 및 인원 선택</h3>
+                <form action="/reserve/payment" method="POST">
+                    <input type="hidden" name="roomId" value="<%= room.id %>">
+                    <input type="hidden" name="hotelId" value="<%= room.productId %>">
+                    
+                    <div class="date-group">
+                        <div class="input-item">
+                            <label for="checkin">체크인 날짜</label>
+                            <input type="date" id="checkin" name="checkin" required>
+                        </div>
+                        <div class="input-item">
+                            <label for="checkout">체크아웃 날짜</label>
+                            <input type="date" id="checkout" name="checkout" required>
+                        </div>
+                    </div>
+
+                    <div class="input-item" style="margin-top: 15px;">
+                        <label for="guestCount">인원 수</label>
+                        <input type="number" id="guestCount" name="guestCount" min="1" max="<%= room.maxCapacity %>" value="1" required>
+                        <small style="color: #666;">(최대 <%= room.maxCapacity %>명)</small>
+                    </div>
+
+                    <div id="remaining-rooms" style="margin: 15px 0; font-weight: bold; color: #3182f6;">
+                        
+                    </div>
+                    <button type="submit" id="payBtn" class="btn-primary">결제 단계로 이동</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        const roomId = "<%= room.id %>";
+
+        const guestInput = document.getElementById('guestCount');
+        guestInput.addEventListener('change', (e) => {
+            const max = <%= room.maxCapacity %>;
+            if (e.target.value > max) {
+                alert(`이 방은 최대 ${max}명까지만 숙박 가능합니다.`);
+                e.target.value = max;
+            }
+        });
+
+        const checkinInput = document.getElementById('checkin');
+        const checkoutInput = document.getElementById('checkout');
+        const invElement = document.getElementById('remaining-rooms');
+        const payBtn = document.getElementById('payBtn');
+
+        // this <--> socket.js
+        function joinInventoryRoom() {
+            const start = document.getElementById('checkin').value;
+            const end = document.getElementById('checkout').value;
+
+            if (start && end) {
+                if(new Date(start) >= new Date(end)) {
+                    alert('체크아웃 날짜는 체크인 날짜보다 나중이어야 합니다.');
+                    return;
+                }
+
+                invElement.innerText = "재고 확인 중 . . .";
+
+                const dates = [];
+                let curr = new Date(start);
+                const last = new Date(end);
+
+                while(curr < last) {
+                    dates.push(curr.toISOString().split('T')[0]);
+                    curr.setDate(curr.getDate() + 1);
+                }
+                // this <--> socket.js
+                socket.emit('join_room', {roomId, dates});
+            }
+        }
+
+        checkinInput.addEventListener('change', joinInventoryRoom);
+        checkoutInput.addEventListener('change', joinInventoryRoom);
+
+        socket.on('inventory_update', (data) => {
+            if (data.remainRooms && data.remainRooms.length > 0 && invElement) {
+                const counts = data.remainRooms.map(item => item.count);
+                const minInventory = Math.min(...counts);
+
+                invElement.innerText = `선택하신 기간의 재고량은 ${minInventory} 입니다.`;
+
+                if (minInventory <= 0) {
+                    payBtn.disabled = true;
+                    payBtn.innerText = `매진되어 선택하실 수 없습니다.`;
+                    invElement.style.color = '#f04452';
+                } else {
+                    payBtn.disabled = false;
+                    payBtn.innerText = `결제 화면으로 이동`;
+                    invElement.style.color = '#3182f6';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

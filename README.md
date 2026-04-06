@@ -1,2 +1,16 @@
-# hotel_reservation_service
-node js 기반 실시간 호텔 예약 &amp; 저장 &amp; 결제 서비스
+# hotel\_reservation\_service
+
+node js 기반 실시간 호텔 예약 \& 저장 \& 결제 서비스
+
+
+
+0.0.1 - 토스페이먼츠 결제 구현
+
+0.0.2  - 결제 상태에 따른 DB STATUS 상세화, 결제 취소시 재고 복구, 예약상태 점검 스케줄러 추가
+
+0.0.3 - 관리자 페이지 추가
+
+
+
+
+
