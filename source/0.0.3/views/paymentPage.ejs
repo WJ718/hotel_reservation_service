@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>결제하기 | TripManager</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .payment-card { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .info-row { display: flex; justify-content: space-between; margin-bottom: 12px; color: #4e5968; }
+        .info-row.total { margin-top: 16px; padding-top: 16px; border-top: 1px solid #f2f4f6; font-weight: bold; color: #191f28; font-size: 1.2em; }
+        .btn-pay { width: 100%; padding: 16px; background: #3182f6; color: white; border: none; border-radius: 12px; font-size: 1.1em; font-weight: bold; cursor: pointer; transition: background 0.2s; }
+        .btn-pay:hover { background: #1b64da; }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <h2 style="margin-bottom: 24px;">결제 상세 확인</h2>
+        
+        <div class="payment-card">
+            <h3 style="margin-bottom: 16px;"><%= hotel.title %></h3>
+            <p style="color: #6b7280; margin-bottom: 20px;"><%= room.title %></p>
+            
+            <div class="info-row">
+                <span>체크인</span>
+                <span><%= checkin %></span>
+            </div>
+            <div class="info-row">
+                <span>체크아웃</span>
+                <span><%= checkout %></span>
+            </div>
+            <div class="info-row">
+                <span>숙박 인원</span>
+                <span><%= guestCount %>명</span>
+            </div>
+            <div class="info-row">
+                <span>총 숙박 기간</span>
+                <span><%= nights %>박</span>
+            </div>
+            <div class="info-row total">
+                <span>총 결제 금액</span>
+                <span><%= amount.toLocaleString() %>원</span>
+            </div>
+        </div>
+
+        <div id="payment-method"></div>
+        <div id="agreement"></div>
+
+        <button type="button" id="btn-pay" class="btn-pay">결제하기</button>
+    </main>
+
+    <script src="https://js.tosspayments.com/v2/standard"></script>
+    <script>
+        const clientKey = "<%= clientkey %>";
+        const customerKey = `USER_<%= user.id %>`;
+        const tossPayments = TossPayments(clientKey);
+        const widgets = tossPayments.widgets({ customerKey });
+
+        const orderId = "<%= orderId %>";
+        let paymentRequested = false;
+
+        const successParams = new URLSearchParams({
+            hotelId: "<%= hotel.id %>",
+            roomId: "<%= room.id %>",
+            checkin: "<%= checkin %>",
+            checkout: "<%= checkout %>",
+            guestCount: "<%= guestCount %>"
+        }).toString();
+
+        // 결제 페이지에서 브라우저 뒤로가기 시 실패 페이지로 보내서 정리
+        history.pushState(null, "", location.href);
+        window.addEventListener("popstate", function () {
+            if (!paymentRequested) {
+                location.replace(
+                    `/reserve/fail?orderId=${encodeURIComponent(orderId)}&code=USER_ABORT&message=${encodeURIComponent('결제를 진행하지 않고 이전 페이지로 이동했습니다.')}`
+                );
+            }
+        });
+
+        async function init() {
+            await widgets.setAmount({ currency: "KRW", value: <%= amount %> });
+            await Promise.all([
+                widgets.renderPaymentMethods({ selector: "#payment-method" }),
+                widgets.renderAgreement({ selector: "#agreement" })
+            ]);
+        }
+
+        document.getElementById("btn-pay").addEventListener("click", async () => {
+            try {
+                paymentRequested = true;
+
+                await widgets.requestPayment({
+                    orderId: orderId,
+                    orderName: "<%= hotel.title %> - <%= room.title %>",
+                    successUrl: window.location.origin + "/reserve/success?" + successParams,
+                    failUrl: window.location.origin + `/reserve/fail?orderId=${encodeURIComponent(orderId)}`
+                });
+            } catch (err) {
+                paymentRequested = false;
+                location.href = `/reserve/fail?orderId=${encodeURIComponent(orderId)}&code=PAYMENT_REQUEST_FAILED`;
+            }
+        });
+
+        init();
+    </script>
+</body>
+</html>

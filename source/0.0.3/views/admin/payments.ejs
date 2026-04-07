@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>결제 관리</title>
+    <link rel="stylesheet" href="/admin/style.css">
+</head>
+<body>
+
+<div class="header">
+    <h2>결제 관리</h2>
+</div>
+
+<div class="container">
+
+    <div class="sidebar">
+        <a href="/admin">대시보드</a>
+        <a href="/admin/reservations">예약 관리</a>
+        <a href="/admin/payments">결제 관리</a>
+        <a href="/admin/inventory">재고 관리</a>
+    </div>
+
+    <div class="content">
+        <h3>결제 목록</h3>
+        
+        <div class="filter-bar">
+
+            <a href="/admin/payments"
+            class="filter-btn <%= selectedStatus === 'ALL' ? 'active' : '' %>">
+                전체
+            </a>
+
+            <a href="/admin/payments?status=READY"
+            class="filter-btn <%= selectedStatus === 'READY' ? 'active' : '' %>">
+                READY
+            </a>
+
+            <a href="/admin/payments?status=DONE"
+            class="filter-btn <%= selectedStatus === 'DONE' ? 'active' : '' %>">
+                DONE
+            </a>
+
+            <a href="/admin/payments?status=REFUNDED"
+            class="filter-btn <%= selectedStatus === 'REFUNDED' ? 'active' : '' %>">
+                REFUNDED
+            </a>
+
+            <a href="/admin/payments?status=FAILED"
+            class="filter-btn <%= selectedStatus === 'FAILED' ? 'active' : '' %>">
+                FAILED
+            </a>
+
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>결제 번호</th>
+                    <th>유저</th>
+                    <th>금액</th>
+                    <th>상태</th>
+                    <th>생성일</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% payments.forEach(p => { %>
+                    <tr>
+                        <td><%= p.orderId %></td>
+                        <td><%= p.userId %></td>
+                        <td><%= p.amount %></td>
+                        <td class="<%= p.status %>"><%= p.status %></td>
+                        <td><%= p.createdAt %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+</body>
+</html>

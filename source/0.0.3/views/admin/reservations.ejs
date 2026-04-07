@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>예약 관리</title>
+    <link rel="stylesheet" href="/admin/style.css">
+</head>
+<body>
+
+<div class="header">
+    <h2>예약 관리</h2>
+</div>
+
+<div class="container">
+
+    <div class="sidebar">
+        <a href="/admin">대시보드</a>
+        <a href="/admin/reservations">예약 관리</a>
+        <a href="/admin/payments">결제 관리</a>
+        <a href="/admin/inventory">재고 관리</a>
+    </div>
+
+    <div class="content">
+        <h3>예약 목록</h3>
+
+        <div class="filter-bar">
+            <a href="/admin/reservations"
+            class="filter-btn <%= selectedStatus === 'ALL' ? 'active' : '' %>">
+                전체
+            </a>
+
+            <a href="/admin/reservations?status=PENDING"
+            class="filter-btn <%= selectedStatus === 'PENDING' ? 'active' : '' %>">
+                PENDING
+            </a>
+
+            <a href="/admin/reservations?status=CONFIRMED"
+            class="filter-btn <%= selectedStatus === 'CONFIRMED' ? 'active' : '' %>">
+                CONFIRMED
+            </a>
+
+            <a href="/admin/reservations?status=FAILED"
+            class="filter-btn <%= selectedStatus === 'FAILED' ? 'active' : '' %>">
+                FAILED
+            </a>
+
+            <a href="/admin/reservations?status=CANCELED"
+            class="filter-btn <%= selectedStatus === 'CANCELED' ? 'active' : '' %>">
+                CANCELED
+            </a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>예약 ID</th>
+                    <th>사용자명</th>
+                    <th>객실</th>
+                    <th>체크인</th>
+                    <th>체크아웃</th>
+                    <th>상태</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% reservations.forEach(r => { %>
+                    <tr>
+                        <td><%= r.id %></td>
+                        <td><%= r.userId %></td>
+                        <td><%= r.roomId %></td>
+                        <td><%= r.checkin %></td>
+                        <td><%= r.checkout %></td>
+                        <td class="<%= r.status %>"><%= r.status %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+</body>
+</html>

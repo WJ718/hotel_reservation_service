@@ -1,0 +1,88 @@
+/* dashboard */
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    background: #222;
+    color: #fff;
+    padding: 15px;
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 200px;
+    background: #333;
+    min-height: 100vh;
+    color: #fff;
+}
+
+.sidebar a {
+    display: block;
+    padding: 12px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    background: #444;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+}
+
+.card {
+    background: #f4f4f4;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+}
+
+/* reservations */
+table { width: 100%; border-collapse: collapse; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+th { background: #f4f4f4; }
+.PENDING { color: orange; }
+.CONFIRMED { color: green; }
+.FAILED { color: red; }
+
+/* payments */
+.READY { color: orange; }
+.DONE { color: green; }
+.FAILED { color: red; }
+
+
+/* 필터버튼 */
+.filter-bar {
+    margin-bottom: 20px;
+}
+
+.filter-btn {
+    display: inline-block;
+    padding: 8px 14px;
+    margin-right: 6px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    color: #333;
+    background: #fff;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.filter-btn:hover {
+    background: #eee;
+}
+
+/* 선택된 버튼 */
+.filter-btn.active {
+    background: #222;
+    color: #fff;
+    border-color: #222;
+}

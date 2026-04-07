@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>재고 관리</title>
+    <link rel="stylesheet" href="/admin/style.css">
+</head>
+<body>
+
+<div class="header">
+    <h2>재고 관리</h2>
+</div>
+
+<div class="container">
+
+    <div class="sidebar">
+        <a href="/admin">대시보드</a>
+        <a href="/admin/reservations">예약 관리</a>
+        <a href="/admin/payments">결제 관리</a>
+        <a href="/admin/inventory">재고 관리</a>
+    </div>
+
+    <div class="content">
+        <h3>재고 목록</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>재고 ID</th>
+                    <th>호텔명</th>
+                    <th>객실명</th>
+                    <th>날짜</th>
+                    <th>남은 객실 수</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% schedules.forEach(s => { %>
+                    <tr>
+                        <td><%= s.id %></td>
+                        <td><%= s.Room.Product.title %></td>
+                        <td><%= s.Room.title %></td>
+                        <td><%= s.date %></td>
+                        <td><%= s.remainingRooms %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+</body>
+</html>

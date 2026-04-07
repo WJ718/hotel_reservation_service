@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>예약 상세 확인 | TripManager</title>
+    <link rel="stylesheet" href="/checkBook.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>예약 상세 내역</h1>
+            <span class="status-badge">
+                <%= reservation.status === 'CONFIRMED' ? '예약 확정' : '취소됨' %>
+            </span>
+            
+        </div>
+
+        <div class="section">
+            <div class="section-title">숙소 정보</div>
+            <div class="hotel-title"><%= reservation.Product ? reservation.Product.title : '정보 없음' %></div>
+            <div class="location">📍 <%= reservation.Product ? reservation.Product.location : '위치 정보 없음' %></div>
+            
+            <div class="info-card">
+                <div class="info-row">
+                    <span class="label">객실 타입</span>
+                    <span class="value"><%= reservation.Room ? reservation.Room.title : '객실 정보 없음' %></span>
+                </div>
+                <div class="info-row">
+                    <span class="label">투숙 인원</span>
+                    <span class="value"><%= reservation.guestCount %>명</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">일정 정보</div>
+            <div class="info-card">
+                <div class="info-row">
+                    <span class="label">체크인</span>
+                    <span class="value"><%= reservation.checkin %></span>
+                </div>
+                <div class="info-row">
+                    <span class="label">체크아웃</span>
+                    <span class="value"><%= reservation.checkout %></span>
+                </div>
+                <div class="info-row" style="margin-top: 10px; padding-top: 10px; border-top: 1px dashed #d1d6db;">
+                    <span class="label">결제 번호</span>
+                    <span class="value">#<%= payment.orderId  %></span>
+                </div>
+            </div>
+        </div>
+        <div class="btn-group">
+            <a href="javascript:history.back()" class="btn btn-secondary">이전 페이지</a>
+            <button onclick="window.print()" class="btn btn-primary">확인서 인쇄</button>
+        </div>
+        <br>
+        <div class="section">
+            <% if (reservation.status === 'CONFIRMED') { %> 
+                <button onclick="refund()" class="btn" style="background: #f04452; color: white; width: 100%;">
+                    예약 취소
+                </button>   
+            <% } else if (reservation.status === 'CANCELLED') { %>
+                <button class="btn" style="background: #e5e8eb; color: #8b95a1; width: 100%; cursor: not-allowed;" disabled>
+                    취소됨
+                </button>
+            <% } %>
+        </div>
+    </div>
+
+    <!-- 스크립트 -->
+    <script>
+        async function refund() {
+            const reason = prompt('취소 사유를 입력해주세요.', '고객 요청 취소');
+            if (!reason) return;
+
+            if (confirm('환불하시겠습니까?')) {
+                try {
+                    const response = await fetch('/my/bookings/<%= reservation.id %>/refund', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ cancelReason: reason })
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        alert('정상적으로 처리되었습니다.');
+                        location.reload();
+                    } else {
+                        alert(result.message || '환불 처리에 실패했습니다.');
+                    }
+                } catch (err) {
+                    console.error(err);
+                    alert('네트워크 오류가 발생했습니다.');
+                }
+            }
+        }
+    </script>
+</body>
+</html>

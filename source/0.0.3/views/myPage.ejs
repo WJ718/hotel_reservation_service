@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>마이페이지 | TripManager</title>
+    <link rel="stylesheet" href="/myPage.css">
+</head>
+<body>
+
+<header>
+    <div class="logo" onclick="location.href='/'" style="cursor: pointer;">TripManager</div>
+    <div class="auth-btns">
+        <span><%= user.id %>님 환영합니다!</span>
+        <a href="/auth/logout">로그아웃</a>
+    </div>
+</header>
+
+<div class="mypage-container">
+    <h2>내 정보 수정하기</h2>
+    <hr style="margin: 20px 0;">
+
+    <form action="/my/update" method="post" class="update-form">
+        <div class="input-group">
+            <label for="name">닉네임</label>
+            <input type="text" id="name" name="name" value="<%= user.name %>" required>
+        </div>
+
+        <div class="input-group">
+            <label for="password">비밀번호</label>
+            <input type="password" id="password" name="password" placeholder="변경할 비밀번호를 입력하세요 (선택)">
+        </div>
+        <button type="submit" class="btn-submit">정보 수정하기</button>
+    </form>
+</div>
+
+<div class="mypage-container">
+    <h2>나의 거래 내역</h2>
+    <div style="display: flex; justify-content: space-between; align-items: baseline; text-decoration: none; color: #8b95a1; font-size: 0.7rem;">
+        <a href="/my/bookings">전체 내역 확인</a>
+    </div>
+    <hr style="margin: 20px 0;">
+    
+    <hr style="border: 0; height: 1px; background: #eee; margin: 20px 0;">
+
+    <div class="booking-summary-list">
+        <% if (reservation && reservation.length > 0) { %>
+            <% reservation.slice(0, 3).forEach(function(booking) { %> <div class="booking-summary-item">
+                    <div class="booking-text">
+                        <h4>
+                            <%= booking.Room ? booking.Product.title + '-' + booking.Room.title : '객실 정보 없음' %> 
+                            <span style="font-size: 0.7em; margin-left: 5px;">
+                                ( 
+                                <% if (booking.status === 'CONFIRMED') { %>
+                                    <b style="color: #007bff;">예약완료</b>
+                                <% } else if ((booking.status === 'CANCELED')) { %>
+                                    <b style="color: #f04452;">환불완료</b>
+                                <% } %>
+                                )
+                            </span>
+                        </h4>
+                        <p><%= booking.checkin %> ~ <%= booking.checkout %></p>
+                    </div>
+                    <a href="/my/bookings/<%= booking.id %>" class="btn-more">상세</a>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <div style="text-align: center; color: #abb1b9; padding: 20px 0;">
+                <p>아직 예약 내역이 없습니다.</p>
+            </div>
+        <% } %>
+    </div>
+</div>
+</body>
+</html>
