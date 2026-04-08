@@ -91,5 +91,5 @@
 
 | 예약 관리 | 재고 관리 |
 |-------------|----------------|
-| <img src="./img/screen/adminreverse.png" width="350"/> | <img src="./img/screen/admininven.png" width="350"/> |
+| <img src="./img/screen/adminreserve.png" width="350"/> | <img src="./img/screen/admininven.png" width="350"/> |
 
