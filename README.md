@@ -58,12 +58,20 @@
 
 ---
 
-## 기능 시연 이미지
+## 상세 화면 이미지
 
-| 메인 화면 | 채팅방 입장 | GIF 전송 |
-|-----------|-------------|----------|
-| <img src="./images/main.png" width="250"/> | <img src="./images/enter_room.png" width="250"/> | <img src="./images/send.png" width="250"/> |
+| 메인 화면 | 로그인 화면 | 마이페이지 |
+|-----------|-------------|-------------|
+| <img src="./img/screen/main.png" width="250"/> | <img src="./img/screen/login.png" width="250"/> | <img src="./img/screen/mypage.png" width="250"/> |
 
-| 로그인 후 화면 | 프로필 관리 |
-|----------------|--------------|
-| <img src="./images/afterlogin.png" width="250"/> | <img src="./images/profile.png" width="250"/> |
+| 숙소 선택 화면 | 객실 선택 화면 | 날짜 선택 화면 |
+|----------------|--------------|--------------|
+| <img src="./img/screen/hotellist.png" width="250"/> | <img src="./img/screen/roomlist.png" width="250"/> | <img src="./img/screen/selectdates.png" width="250"/> |
+
+| 결제 화면 | 결제 성공 화면 | 예약 내역 화면 |
+|----------------|--------------|--------------|
+| <img src="./img/screen/paymentpage.png" width="250"/> | <img src="./img/screen/successpage.png" width="250"/> | <img src="./img/screen/checkbooking.png" width="250"/> |
+
+| 상세 결제 정보 화면  |
+|----------------|
+| <img src="./img/screen/detailpage.png" width="250"/> |
