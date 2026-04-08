@@ -3,20 +3,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 
 exports.renderAdmin = (req, res) => {
-    const user = req.user;
-
-    // 로그인 안 된 경우
-    if (!user) {
-        return res.render('admin/login');
-    }
-
-    // 로그인은 했지만 관리자 아님
-    if (user.role !== 'ADMIN') {
-        return res.status(403).send('관리자만 접근할 수 있습니다.');
-    }
-
-    // 관리자 로그인 상태
-    return res.render('admin/dashboard', { user });
+    return res.render('admin/login');
 };
 
 exports.loginAdmin = (req, res, next) => {
