@@ -62,16 +62,16 @@
 
 | 메인 화면 | 로그인 화면 | 마이페이지 |
 |-----------|-------------|-------------|
-| <img src="./img/screen/main.png" width="250"/> | <img src="./img/screen/login.png" width="250"/> | <img src="./img/screen/mypage.png" width="250"/> |
+| <img src="./img/screen/main.png" width="550"/> | <img src="./img/screen/login.png" width="550"/> | <img src="./img/screen/mypage.png" width="550"/> |
 
 | 숙소 선택 화면 | 객실 선택 화면 | 날짜 선택 화면 |
 |----------------|--------------|--------------|
-| <img src="./img/screen/hotellist.png" width="250"/> | <img src="./img/screen/roomlist.png" width="250"/> | <img src="./img/screen/selectdates.png" width="250"/> |
+| <img src="./img/screen/hotellist.png" width="550"/> | <img src="./img/screen/roomlist.png" width="550"/> | <img src="./img/screen/selectdates.png" width="550"/> |
 
 | 결제 화면 | 결제 성공 화면 | 예약 내역 화면 |
 |----------------|--------------|--------------|
-| <img src="./img/screen/paymentpage.png" width="250"/> | <img src="./img/screen/successpage.png" width="250"/> | <img src="./img/screen/checkbooking.png" width="250"/> |
+| <img src="./img/screen/paymentpage.png" width="550"/> | <img src="./img/screen/successpage.png" width="550"/> | <img src="./img/screen/checkbooking.png" width="550"/> |
 
 | 상세 결제 정보 화면  |
 |----------------|
-| <img src="./img/screen/detailpage.png" width="250"/> |
+| <img src="./img/screen/detailpage.png" width="550"/> |
