@@ -21,7 +21,8 @@ exports.login = (req, res, next) => {
       return next(authError);
     }
     if (!user) {
-      return res.status(401).json({ message: info.message });
+      user = null;
+      return res.render('main', {user});
     }
 
     // 로그인 인증 성공
