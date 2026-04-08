@@ -58,7 +58,7 @@
 
 ---
 
-## 상세 화면 이미지
+## 서비스 화면 이미지
 
 | 메인 화면 | 로그인 화면 |
 |-----------|-------------|
@@ -79,3 +79,17 @@
 | 예약 내역 화면 | 상세 결제 정보 화면 |
 |--------------|----------------|
 | <img src="./img/screen/checkbooking.png" width="350"/> | <img src="./img/screen/detailpage.png" width="350"/> |
+
+
+---
+
+## 관리자 전용 화면 이미지
+
+| 대시보드 | 결제 관리 |
+|-----------|-------------|
+| <img src="./img/screen/adminpage.png" width="350"/> | <img src="./img/screen/adminpayment.png" width="350"/> |
+
+| 예약 관리 | 재고 관리 |
+|-------------|----------------|
+| <img src="./img/screen/adminreverse.png" width="350"/> | <img src="./img/screen/admininven.png" width="350"/> |
+
