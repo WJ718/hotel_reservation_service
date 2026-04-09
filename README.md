@@ -52,7 +52,7 @@ source/
 
 ## E-R 다이어그램
 
-![store_inven](./img/ER.png)
+![ER](./img/ER.png)
 
 ---
 
