@@ -31,6 +31,23 @@
 
 ---
 
+## 프로젝트 구조
+
+```bash
+source/
+├─ models/        # Sequelize 모델
+├─ routes/        # 라우터
+├─ controllers/   # 컨트롤러 함수
+├─ services/      # 비즈니스 로직
+├─ utils/         # 단순 공용함수 (날짜계산)
+├─ views/         # EJS 템플릿
+├─ public/        # 정적 파일(css, img)
+├─ sockets/       # 실시간 재고 반영 로직
+├─ scheduler/     # 미결제 자동 취소 스케줄러
+└─ config/        # DB / 환경설정
+
+---
+
 ![store_inven](./img/store_inven.png)
 ![prov_reserve](./img/prov_reserve.png)
 - 결제창 진입 시, 재고를 선점한 후 가예약 상태로 DB에 기록 (sequelize.transaction으로 LOCK 처리)
