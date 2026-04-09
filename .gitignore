@@ -74,6 +74,6 @@ Thumbs.db
 jest.config.js.snap
 
 # =========================
-# Optional: uploads (서버 파일 저장 시)
+# File upload
 # =========================
 uploads/
